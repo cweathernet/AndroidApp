@@ -24,10 +24,28 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+	private GPSTracker gps;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		   gps = new GPSTracker(MainActivity.this);
+		  
+        if(gps.canGetLocation()){
+            
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+             
+            // \n is for new line
+            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();    
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
+        }
 
 		final Button button = (Button) findViewById(R.id.publish);
 		button.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +60,8 @@ public class MainActivity extends Activity {
 
 		@Override
 		protected String doInBackground(Void... params) {
+
+			
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpPost httppost = new HttpPost(Constants.API_BASE_URL);
 			try {
@@ -74,7 +94,8 @@ public class MainActivity extends Activity {
 		protected void onPostExecute(String result) {
 			if (result != null) {
 				Toast.makeText(MainActivity.this, "response  : " + result,
-						Toast.LENGTH_SHORT).show();
+						Toast.LENGTH_LONG
+						).show();
 			}
 		}
 	}
