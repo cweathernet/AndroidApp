@@ -30,22 +30,25 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		   gps = new GPSTracker(MainActivity.this);
-		  
-        if(gps.canGetLocation()){
-            
-            double latitude = gps.getLatitude();
-            double longitude = gps.getLongitude();
-             
-            // \n is for new line
-            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();    
-        }else{
-            // can't get location
-            // GPS or Network is not enabled
-            // Ask user to enable GPS/network in settings
-            gps.showSettingsAlert();
-        }
+
+		gps = new GPSTracker(MainActivity.this);
+
+		if (gps.canGetLocation()) {
+
+			double latitude = gps.getLatitude();
+			double longitude = gps.getLongitude();
+
+			// \n is for new line
+			Toast.makeText(
+					getApplicationContext(),
+					"Your Location is - \nLat: " + latitude + "\nLong: "
+							+ longitude, Toast.LENGTH_LONG).show();
+		} else {
+			// can't get location
+			// GPS or Network is not enabled
+			// Ask user to enable GPS/network in settings
+			gps.showSettingsAlert();
+		}
 
 		final Button button = (Button) findViewById(R.id.publish);
 		button.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +64,6 @@ public class MainActivity extends Activity {
 		@Override
 		protected String doInBackground(Void... params) {
 
-			
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpPost httppost = new HttpPost(Constants.API_BASE_URL);
 			try {
@@ -69,10 +71,8 @@ public class MainActivity extends Activity {
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
 						2);
 				nameValuePairs.add(new BasicNameValuePair("temperature", "30"));
-				nameValuePairs.add(new BasicNameValuePair("humidity",
-						"80%"));
-				nameValuePairs.add(new BasicNameValuePair("pressure",
-						"80%"));
+				nameValuePairs.add(new BasicNameValuePair("humidity", "80%"));
+				nameValuePairs.add(new BasicNameValuePair("pressure", "80%"));
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 				// Execute HTTP Post Request
@@ -94,8 +94,7 @@ public class MainActivity extends Activity {
 		protected void onPostExecute(String result) {
 			if (result != null) {
 				Toast.makeText(MainActivity.this, "response  : " + result,
-						Toast.LENGTH_LONG
-						).show();
+						Toast.LENGTH_LONG).show();
 			}
 		}
 	}
