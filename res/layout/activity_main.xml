@@ -37,4 +37,13 @@
         android:text="Temperature"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_pressure"
+        android:layout_below="@+id/tv_pressure"
+        android:text="Location"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 </RelativeLayout>
