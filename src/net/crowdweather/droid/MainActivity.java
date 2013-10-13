@@ -7,24 +7,21 @@ import android.support.v4.view.ViewPager;
 
 public class MainActivity extends FragmentActivity {
 
-    private PagerAdapter mPagerAdapter;
+	private PagerAdapter mPagerAdapter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.activity_main);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		super.setContentView(R.layout.activity_main);
 
-        this.initialisePaging();
-    }
+		this.initialisePaging();
+	}
 
-    private void initialisePaging() {
-
-
-        this.mPagerAdapter  = new PageAdapter(super.getSupportFragmentManager(),this);
-        ViewPager pager = (ViewPager)super.findViewById(R.id.viewpager);
-        pager.setAdapter(this.mPagerAdapter);
-    }
-    
-    
+	private void initialisePaging() {
+		this.mPagerAdapter = new PageAdapter(super.getSupportFragmentManager(),
+				this);
+		ViewPager pager = (ViewPager) super.findViewById(R.id.viewpager);
+		pager.setAdapter(this.mPagerAdapter);
+	}
 
 }
