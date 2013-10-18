@@ -1,4 +1,4 @@
-AndroidApp
+crowdweather AndroidApp
 ==========
 
 Setting up Development environment
